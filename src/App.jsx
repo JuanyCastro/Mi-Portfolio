@@ -229,7 +229,12 @@ export default function App() {
 
             <div className="flex items-center space-x-4">
               <button onClick={toggleLang} className="flex items-center gap-2 text-sm font-medium hover:text-red-500 transition-colors bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full" title="Change Language">
-                <span className="text-lg leading-none">{lang === 'es' ? '🇪🇸' : '🇬🇧'}</span>
+                <img 
+                  src={lang === 'es' ? "https://flagcdn.com/w20/es.png" : "https://flagcdn.com/w20/gb.png"} 
+                  width="20" 
+                  alt="flag"
+                  className="rounded-xs shadow-sm"
+                />
                 <span className="font-bold">{lang.toUpperCase()}</span>
               </button>
               <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" title="Toggle Theme">
@@ -409,9 +414,9 @@ export default function App() {
                   </a>
                   
                   {/* CONTENIDO DE LA TARJETA */}
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-6 flex flex-col grow">
                     <h4 className="text-xl font-bold mb-2 group-hover:text-red-500 transition-colors">{text.title}</h4>
-                    <p className={`text-sm mb-6 leading-relaxed flex-grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <p className={`text-sm mb-6 leading-relaxed grow ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                       {text.desc}
                     </p>
                     
