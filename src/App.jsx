@@ -261,11 +261,7 @@ export default function App() {
             {t.hero.desc}
           </p>
           
-          <div className="flex flex-wrap gap-4">
-            <a href="#" className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors shadow-lg shadow-red-600/20">
-              <Download size={20} />
-              {t.hero.cv}
-            </a>
+          <div className="flex flex-wrap gap-4">           
             <a href="https://github.com/JuanyCastro" target="_blank" rel="noreferrer" className={`flex items-center gap-2 px-6 py-3 font-medium rounded-lg border transition-colors ${darkMode ? 'border-gray-700 hover:bg-gray-800' : 'border-gray-300 hover:bg-gray-100'}`}>
               <Github size={20} />
               {t.hero.github}
