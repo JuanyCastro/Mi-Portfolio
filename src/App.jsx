@@ -82,7 +82,6 @@ const translations = {
       specialized: "Especializado en Backend", 
       desc: "Diseño y construyo soluciones de software robustas, escalables y eficientes, enfocadas en la lógica del servidor y bases de datos.", 
       cv: "Descargar CV", 
-      github: "Mi GitHub" 
     },
     about: { 
       title: "Sobre Mí", 
@@ -140,7 +139,6 @@ const translations = {
       specialized: "Specialized in Backend", 
       desc: "I design and build robust, scalable, and efficient software solutions, focusing on server-side logic and databases.", 
       cv: "Download Resume", 
-      github: "My GitHub" 
     },
     about: { 
       title: "About Me", 
@@ -264,7 +262,6 @@ export default function App() {
           <div className="flex flex-wrap gap-4">           
             <a href="https://github.com/JuanyCastro" target="_blank" rel="noreferrer" className={`flex items-center gap-2 px-6 py-3 font-medium rounded-lg border transition-colors ${darkMode ? 'border-gray-700 hover:bg-gray-800' : 'border-gray-300 hover:bg-gray-100'}`}>
               <Github size={20} />
-              {t.hero.github}
             </a>
             <a href="https://www.linkedin.com/in/juanignaciocastro2002/" target="_blank" rel="noreferrer" className={`flex items-center justify-center p-3 rounded-lg border transition-colors ${darkMode ? 'border-gray-700 hover:bg-gray-800 text-blue-400' : 'border-gray-300 hover:bg-gray-100 text-blue-600'}`} title="LinkedIn">
               <Linkedin size={20} />
