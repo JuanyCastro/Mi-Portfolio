@@ -459,7 +459,7 @@ export default function App() {
           
           {/* Formulario conectado a Formspree */}
           <form 
-            action="https://formspree.io/f/TU_ID_AQUI" 
+            action="https://formspree.io/f/mrejylzl" 
             method="POST" 
             className={`p-8 rounded-2xl border text-left flex flex-col gap-4 shadow-lg ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}
           >
