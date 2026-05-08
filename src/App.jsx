@@ -4,12 +4,12 @@ import {
   Download, 
   Moon, 
   Sun, 
-  Globe, 
   Terminal, 
   Code2, 
   Database, 
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  Send
 } from 'lucide-react';
 
 import imgLinguaNova from './assets/preview-linguanova.png';
@@ -30,10 +30,10 @@ const Linkedin = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-// Datos técnicos de proyectos (links e imágenes no cambian con el idioma)
+// Datos técnicos de proyectos
 const projectsData = [
   {
-    image: imgLinguaNova, // Usamos la variable importada arriba
+    image: imgLinguaNova,
     tech: ["C#", ".NET Core", "SQL Server", "Azure"],
     linkRepo: "https://github.com/JuanyCastro/LinguaNova-ASPNET-MVC.git",
     linkDemo: "https://linguanova.azurewebsites.net",
@@ -45,10 +45,32 @@ const projectsData = [
     tech: ["React", ".NET", "Firebase", "Play Console"],
     linkRepo: null,
     linkDemo: "https://croquis-seguros.web.app",
-    linkPlay: "https://play.google.com/store/apps/details?id=com.juanycastro.croquisseguros", // Asegurate de poner el link real
+    linkPlay: "https://play.google.com/store/apps/details?id=com.juanycastro.croquisseguros", 
     isCommercial: true,
   }
 ];
+
+// Datos de habilidades (Usando íconos oficiales de Devicon)
+const skillsData = {
+  backend: [
+    { name: 'C#', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg' },
+    { name: '.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg' },
+    { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
+    { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg' }
+  ],
+  frontend: [
+    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
+    { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg' },
+    { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg' },
+    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' }
+  ],
+  tools: [
+    { name: 'SQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg' },
+    { name: 'Azure', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg' },
+    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
+    { name: 'Postman', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg' }
+  ]
+};
 
 // --- DICCIONARIO DE IDIOMAS ---
 const translations = {
@@ -65,13 +87,13 @@ const translations = {
     about: { 
       title: "Sobre Mí", 
       p1: "Soy estudiante de la Tecnicatura Universitaria en Programación en la UTN FRGP. Me apasiona resolver problemas complejos y optimizar procesos a través del código.", 
-      p2: "Aunque me considero Fullstack y disfruto creando interfaces interactivas con React, mi verdadero fuerte y pasión es el Backend. Me encanta trabajar con arquitecturas de software, APIs RESTful y el modelado de bases de datos." 
+      p2: "Aunque me considero Fullstack y disfruto creando interfaces interactivas con React, mi verdadero fuerte y pasión es el Backend. Además, mi formación como Profesor de Inglés me permite comunicarme fluidamente en equipos internacionales y consumir documentación técnica sin barreras." 
     },
     skills: { 
       title: "Habilidades Técnicas", 
       backend: "Backend", 
       frontend: "Frontend", 
-      tools: "Herramientas & Bases de Datos" 
+      tools: "Herramientas & Nube" 
     },
     projects: { 
       title: "Proyectos Destacados", 
@@ -80,7 +102,6 @@ const translations = {
       repo: "Código",
       demo: "Web",
       playstore: "Play Store",
-      // Solo dejamos los textos
       itemsText: [
         {
           title: "LinguaNova",
@@ -94,14 +115,20 @@ const translations = {
     },
     edu: { 
       title: "Educación", 
-      degree: "Tecnicatura Universitaria en Programación", 
-      uni: "Universidad Tecnológica Nacional (UTN FRGP)", 
-      status: "Estudiante en curso" 
+      degree1: "Tecnicatura Univ. en Programación", 
+      uni1: "Universidad Tecnológica Nacional (UTN FRGP)", 
+      status1: "Estudiante en curso",
+      degree2: "Profesorado de Inglés", 
+      uni2: "Instituto Superior Cultural Británico", 
+      status2: "Finalizado (2020 - 2024)" 
     },
     contact: { 
       title: "Ponte en Contacto", 
-      desc: "¿Tienes una oportunidad laboral, un proyecto en mente o simplemente quieres conectar? Mi bandeja de entrada está siempre abierta.", 
-      btn: "Escribir Email" 
+      desc: "¿Tienes una oportunidad laboral, un proyecto en mente o simplemente quieres conectar? Envíame un mensaje.", 
+      formName: "Tu Nombre",
+      formEmail: "Tu Correo Electrónico",
+      formMsg: "Tu Mensaje",
+      btn: "Enviar Mensaje" 
     },
     footer: "Construido por Juan Ignacio Castro. Todos los derechos reservados."
   },
@@ -118,13 +145,13 @@ const translations = {
     about: { 
       title: "About Me", 
       p1: "I am a student of the University Degree in Programming at UTN FRGP. I am passionate about solving complex problems and optimizing processes through code.", 
-      p2: "Although I consider myself Fullstack and enjoy creating interactive interfaces with React, my true strength and passion is the Backend. I love working with software architectures, RESTful APIs, and database modeling." 
+      p2: "Although I consider myself Fullstack and enjoy creating interactive interfaces with React, my true strength and passion is the Backend. Furthermore, my background as an English Teacher allows me to communicate fluently in international teams and consume technical documentation without barriers." 
     },
     skills: { 
       title: "Technical Skills", 
       backend: "Backend", 
       frontend: "Frontend", 
-      tools: "Tools & Databases" 
+      tools: "Tools & Cloud" 
     },
     projects: { 
       title: "Featured Projects", 
@@ -146,14 +173,20 @@ const translations = {
     },
     edu: { 
       title: "Education", 
-      degree: "University Degree in Programming", 
-      uni: "National Technological University (UTN FRGP)", 
-      status: "Current Student" 
+      degree1: "University Degree in Programming", 
+      uni1: "National Technological University (UTN FRGP)", 
+      status1: "Current Student",
+      degree2: "English Teacher Degree", 
+      uni2: "Instituto Superior Cultural Británico", 
+      status2: "Graduated (2020 - 2024)" 
     },
     contact: { 
       title: "Get In Touch", 
-      desc: "Do you have a job opportunity, a project in mind, or just want to connect? My inbox is always open.", 
-      btn: "Send Email" 
+      desc: "Do you have a job opportunity, a project in mind, or just want to connect? Send me a message.", 
+      formName: "Your Name",
+      formEmail: "Your Email",
+      formMsg: "Your Message",
+      btn: "Send Message" 
     },
     footer: "Built by Juan Ignacio Castro. All rights reserved."
   }
@@ -176,13 +209,6 @@ export default function App() {
   const toggleLang = () => setLang(lang === 'es' ? 'en' : 'es');
   const toggleTheme = () => setDarkMode(!darkMode);
 
-  // Datos de habilidades
-  const skillsData = {
-    backend: ['C#', '.NET', 'Java', 'Spring Boot'],
-    frontend: ['React', 'HTML5', 'CSS3', 'JavaScript'],
-    tools: ['SQL', 'Git', 'GitHub', 'Postman']
-  };
-
   return (
     <div className={`min-h-screen font-sans transition-colors duration-300 ${darkMode ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       
@@ -191,7 +217,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <span className="text-xl font-bold tracking-tighter text-red-600 dark:text-red-500">
-              JIC.
+              JIC
             </span>
             
             <div className="hidden md:flex space-x-8 text-sm font-medium">
@@ -202,8 +228,9 @@ export default function App() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <button onClick={toggleLang} className="flex items-center gap-1 text-sm font-medium hover:text-red-500 transition-colors" title="Change Language">
-                <Globe size={18} /> {lang.toUpperCase()}
+              <button onClick={toggleLang} className="flex items-center gap-2 text-sm font-medium hover:text-red-500 transition-colors bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full" title="Change Language">
+                <span className="text-lg leading-none">{lang === 'es' ? '🇪🇸' : '🇬🇧'}</span>
+                <span className="font-bold">{lang.toUpperCase()}</span>
               </button>
               <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" title="Toggle Theme">
                 {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -219,7 +246,7 @@ export default function App() {
         <section className="min-h-[80vh] flex flex-col justify-center items-start">
           <p className="text-red-600 dark:text-red-500 font-mono mb-4">{t.hero.greeting}</p>
           <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight mb-4">
-            Juan Ignacio Castro.
+            Juan Ignacio Castro
           </h1>
           <h2 className={`text-4xl sm:text-6xl font-bold mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
             {t.hero.role}. <br/>
@@ -260,15 +287,27 @@ export default function App() {
             </div>
             
             <div className={`p-8 rounded-2xl ${darkMode ? 'bg-gray-900 border border-gray-800' : 'bg-white shadow-xl border border-gray-100'}`}>
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
                 <Terminal className="text-red-500" /> {t.edu.title}
               </h3>
-              <div className="relative pl-6 border-l-2 border-red-500/30">
-                <div className="absolute w-3 h-3 bg-red-500 rounded-full -left-[7px] top-2 shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
-                <h4 className="text-xl font-bold">{t.edu.degree}</h4>
-                <p className={`font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{t.edu.uni}</p>
+              
+              {/* Educación 1: UTN */}
+              <div className="relative pl-6 border-l-2 border-red-500/30 mb-8">
+                <div className="absolute w-3 h-3 bg-red-500 rounded-full -left-1.75 top-2 shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
+                <h4 className="text-xl font-bold">{t.edu.degree1}</h4>
+                <p className={`font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{t.edu.uni1}</p>
                 <p className={`text-sm mt-2 flex items-center gap-1 ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
-                  <ChevronRight size={14} className="text-red-500"/> {t.edu.status}
+                  <ChevronRight size={14} className="text-red-500"/> {t.edu.status1}
+                </p>
+              </div>
+
+              {/* Educación 2: Inglés */}
+              <div className="relative pl-6 border-l-2 border-gray-300 dark:border-gray-700">
+                <div className="absolute w-3 h-3 bg-gray-400 dark:bg-gray-600 rounded-full -left-1.75 top-2"></div>
+                <h4 className="text-lg font-bold">{t.edu.degree2}</h4>
+                <p className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.edu.uni2}</p>
+                <p className={`text-sm mt-1 flex items-center gap-1 ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
+                  <ChevronRight size={14} className="text-gray-400 dark:text-gray-600"/> {t.edu.status2}
                 </p>
               </div>
             </div>
@@ -283,48 +322,51 @@ export default function App() {
           
           <div className="grid md:grid-cols-3 gap-6">
             {/* Backend */}
-            <div className={`p-6 rounded-xl border ${darkMode ? 'bg-gray-900 border-gray-800 hover:border-red-500/50' : 'bg-white shadow-lg border-gray-100 hover:border-red-500/30'} transition-colors`}>
+            <div className={`p-6 rounded-xl border ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white shadow-lg border-gray-100'} transition-colors`}>
               <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-6">
                 <Database className="text-red-500" size={24} />
               </div>
-              <h4 className="text-xl font-bold mb-4">{t.skills.backend}</h4>
-              <ul className="space-y-2">
+              <h4 className="text-xl font-bold mb-6">{t.skills.backend}</h4>
+              <div className="grid grid-cols-2 gap-4">
                 {skillsData.backend.map(skill => (
-                  <li key={skill} className={`flex items-center gap-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div> {skill}
-                  </li>
+                  <div key={skill.name} className={`flex flex-col items-center justify-center p-3 rounded-lg border ${darkMode ? 'border-gray-800 bg-gray-950/50 hover:border-red-500/50' : 'border-gray-100 bg-gray-50 hover:border-red-500/30'} transition-colors`}>
+                    <img src={skill.icon} alt={skill.name} className="w-8 h-8 mb-2 drop-shadow-sm" />
+                    <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{skill.name}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
             {/* Frontend */}
-            <div className={`p-6 rounded-xl border ${darkMode ? 'bg-gray-900 border-gray-800 hover:border-red-500/50' : 'bg-white shadow-lg border-gray-100 hover:border-red-500/30'} transition-colors`}>
+            <div className={`p-6 rounded-xl border ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white shadow-lg border-gray-100'} transition-colors`}>
               <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-6">
                 <Code2 className="text-red-500" size={24} />
               </div>
-              <h4 className="text-xl font-bold mb-4">{t.skills.frontend}</h4>
-              <ul className="space-y-2">
+              <h4 className="text-xl font-bold mb-6">{t.skills.frontend}</h4>
+              <div className="grid grid-cols-2 gap-4">
                 {skillsData.frontend.map(skill => (
-                  <li key={skill} className={`flex items-center gap-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div> {skill}
-                  </li>
+                  <div key={skill.name} className={`flex flex-col items-center justify-center p-3 rounded-lg border ${darkMode ? 'border-gray-800 bg-gray-950/50 hover:border-red-500/50' : 'border-gray-100 bg-gray-50 hover:border-red-500/30'} transition-colors`}>
+                    <img src={skill.icon} alt={skill.name} className="w-8 h-8 mb-2 drop-shadow-sm" />
+                    <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{skill.name}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            {/* Tools */}
-            <div className={`p-6 rounded-xl border ${darkMode ? 'bg-gray-900 border-gray-800 hover:border-red-500/50' : 'bg-white shadow-lg border-gray-100 hover:border-red-500/30'} transition-colors`}>
+            {/* Tools & Cloud */}
+            <div className={`p-6 rounded-xl border ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white shadow-lg border-gray-100'} transition-colors`}>
               <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-6">
                 <Terminal className="text-red-500" size={24} />
               </div>
-              <h4 className="text-xl font-bold mb-4">{t.skills.tools}</h4>
-              <ul className="space-y-2">
+              <h4 className="text-xl font-bold mb-6">{t.skills.tools}</h4>
+              <div className="grid grid-cols-2 gap-4">
                 {skillsData.tools.map(skill => (
-                  <li key={skill} className={`flex items-center gap-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div> {skill}
-                  </li>
+                  <div key={skill.name} className={`flex flex-col items-center justify-center p-3 rounded-lg border ${darkMode ? 'border-gray-800 bg-gray-950/50 hover:border-red-500/50' : 'border-gray-100 bg-gray-50 hover:border-red-500/30'} transition-colors`}>
+                    <img src={skill.icon} alt={skill.name} className="w-8 h-8 mb-2 drop-shadow-sm" />
+                    <span className={`text-xs font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{skill.name}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -337,14 +379,13 @@ export default function App() {
           <p className={`mb-10 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.projects.subtitle}</p>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Combinamos los textos traducidos con los datos técnicos */}
             {t.projects.itemsText.map((text, index) => {
-              const technicalData = projectsData[index]; // Obtenemos la imagen, tags y links
+              const technicalData = projectsData[index]; 
               
               return (
                 <div key={index} className={`group rounded-xl overflow-hidden border ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200 shadow-lg'} flex flex-col`}>
                   
-                  {/* CONTENEDOR DE IMAGEN (Clickeable a la Web Demo) */}
+                  {/* CONTENEDOR DE IMAGEN */}
                   <a 
                     href={technicalData.linkDemo} 
                     target="_blank" 
@@ -352,19 +393,14 @@ export default function App() {
                     className="relative block h-52 overflow-hidden border-b border-gray-200 dark:border-gray-800"
                     title={`${t.projects.demo} ${text.title}`}
                   >
-                    {/* Superposición de gradiente rojo al hacer hover en la tarjeta */}
                     <div className="absolute inset-0 z-10 bg-red-950/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                       <ExternalLink size={32} className="text-white bg-red-600 p-2 rounded-full shadow-xl translate-y-2 group-hover:translate-y-0 transition-transform duration-300" />
                     </div>
-                    
-                    {/* La imagen propiamente dicha */}
                     <img 
                       src={technicalData.image} 
                       alt={`Preview ${text.title}`} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
-                    
-                    {/* Badge de Proyecto Comercial */}
                     {technicalData.isCommercial && (
                       <div className="absolute top-4 right-4 z-20 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider shadow-lg">
                         {t.projects.commercial}
@@ -413,17 +449,61 @@ export default function App() {
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
+        {/* CONTACT FORM SECTION */}
         <section id="contact" className="py-32 text-center max-w-2xl mx-auto">
           <p className="text-red-500 font-mono mb-4">04. ¿Qué sigue?</p>
           <h3 className="text-4xl font-bold mb-6">{t.contact.title}</h3>
           <p className={`mb-10 text-lg ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
             {t.contact.desc}
           </p>
-          <a href="mailto:juanycastro2002@gmail.com" className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-colors shadow-lg shadow-red-600/20">
-            <Mail size={20} />
-            {t.contact.btn}
-          </a>
+          
+          {/* Formulario conectado a Formspree */}
+          <form 
+            action="https://formspree.io/f/TU_ID_AQUI" 
+            method="POST" 
+            className={`p-8 rounded-2xl border text-left flex flex-col gap-4 shadow-lg ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}
+          >
+            <div className="flex flex-col gap-1">
+              <label htmlFor="name" className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.contact.formName}</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                className={`p-3 rounded-lg border outline-none focus:border-red-500 transition-colors ${darkMode ? 'bg-gray-950 border-gray-800 text-gray-100' : 'bg-gray-50 border-gray-200 text-gray-900'}`}
+              />
+            </div>
+            
+            <div className="flex flex-col gap-1">
+              <label htmlFor="email" className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.contact.formEmail}</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                className={`p-3 rounded-lg border outline-none focus:border-red-500 transition-colors ${darkMode ? 'bg-gray-950 border-gray-800 text-gray-100' : 'bg-gray-50 border-gray-200 text-gray-900'}`}
+              />
+            </div>
+            
+            <div className="flex flex-col gap-1">
+              <label htmlFor="message" className={`text-sm font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.contact.formMsg}</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                required 
+                className={`p-3 rounded-lg border outline-none focus:border-red-500 transition-colors resize-none ${darkMode ? 'bg-gray-950 border-gray-800 text-gray-100' : 'bg-gray-50 border-gray-200 text-gray-900'}`}
+              ></textarea>
+            </div>
+            
+            <button 
+              type="submit" 
+              className="mt-2 flex items-center justify-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-colors shadow-lg shadow-red-600/20 w-full"
+            >
+              <Send size={18} />
+              {t.contact.btn}
+            </button>
+          </form>
         </section>
 
       </main>
